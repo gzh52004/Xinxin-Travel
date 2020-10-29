@@ -6,7 +6,7 @@ const Title = function () {
   return (
     <div>
       <Breadcrumb>
-        <Breadcrumb.Item className="line">组件</Breadcrumb.Item>
+        <Breadcrumb.Item className="line">管理信息</Breadcrumb.Item>
       </Breadcrumb>
     </div>
   );

@@ -35,7 +35,6 @@ class App extends React.Component {
         path: "/user",
         name: "user",
         component: User,
-        // icon: <UserOutlined />
       },
 
       {
@@ -43,7 +42,6 @@ class App extends React.Component {
         path: "/goods",
         name: "goods",
         component: Goods,
-        // icon: <ShoppingCartOutlined />
       },
     ],
 
@@ -72,7 +70,6 @@ class App extends React.Component {
     });
   }
   render() {
-    console.log("App.props", this.props);
     const { menu, current } = this.state;
     return (
       <Layout>
