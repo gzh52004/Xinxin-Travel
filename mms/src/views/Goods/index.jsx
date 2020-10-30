@@ -1,28 +1,13 @@
 import request from "../../utils/request";
-import React, { useState, useEffect } from "react";
-import {
-  Table,
-  Button,
-  Modal,
-  Form,
-  Input,
-  DatePicker,
-  TreeSelect,
-  Space
-} from "antd";
+import React, { useState } from "react";
+import { Table, Button, Modal, Form, Input, DatePicker, Space } from "antd";
 import Title from "../../components/title/index";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
 
-<<<<<<< HEAD
-// 新增商品
-const { Search } = Input;
-const onSearch = (value) => console.log(value);
-=======
 // 新增用户
 // const onSearch = (value) => {
 //   console.log(value,555);
-// } 
->>>>>>> 2ef57e622adabdd27ffd051db3ba22dd69f7b731
+// }
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm();
@@ -75,21 +60,14 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 const Goods = function () {
   const { Search } = Input;
 
-  const [bottom] = useState('bottomCenter');
+  const [bottom] = useState("bottomCenter");
   const [datalist, setdatalist] = useState(0);
   const [visible, setVisible] = useState(false);
   const onCreate = (values) => {
     console.log("Received values of form: ", values);
     setVisible(false);
   };
-<<<<<<< HEAD
-  const newday = datalist.newday;
-  console.log(newday, 777);
-=======
 
-
-
->>>>>>> 2ef57e622adabdd27ffd051db3ba22dd69f7b731
   React.useEffect(() => {
     request
       .get("/goods/zhoubian/list", {
@@ -100,32 +78,28 @@ const Goods = function () {
       })
       .then((res) => {
         setdatalist(res.data.data);
-
       });
   }, []);
 
   const onSearch = (value) => {
     const dayscount = datalist.filter((num) => {
-      return num.newday === value
-    })
-    setdatalist(dayscount)
-
-  }
+      return num.newday === value;
+    });
+    setdatalist(dayscount);
+  };
   const onPrice = (value) => {
-    console.log(datalist, 666)
+    console.log(datalist, 666);
     const pricecount = datalist.filter((num) => {
-
       if (num.price.length == value.length) {
-        return num.price < value
+        return num.price < value;
       }
-    })
-    console.log(pricecount, 777)
-    setdatalist(pricecount)
-
-  }
-  const ondel = () =>{
-    console.log(564)
-  }
+    });
+    console.log(pricecount, 777);
+    setdatalist(pricecount);
+  };
+  const ondel = () => {
+    console.log(564);
+  };
 
   const columns = [
     {
@@ -151,7 +125,7 @@ const Goods = function () {
       dataIndex: "newday",
     },
     {
-      title: '删除',
+      title: "删除",
       // key: 'action',
       render: () => (
         <Space size="middle" onClick={ondel}>
@@ -166,11 +140,7 @@ const Goods = function () {
       {/* 按钮组 */}
       <div>
         <Search
-<<<<<<< HEAD
-          placeholder="请输入商品名称"
-=======
           placeholder="请输入天数"
->>>>>>> 2ef57e622adabdd27ffd051db3ba22dd69f7b731
           allowClear
           enterButton
           size="large"
@@ -179,19 +149,11 @@ const Goods = function () {
           maxLength={4}
         />
         <Search
-<<<<<<< HEAD
-          placeholder="请输入天数"
-          allowClear
-          enterButton
-          size="large"
-          onSearch={datalist.newday}
-=======
           placeholder="请输入最高价"
           allowClear
           enterButton
           size="large"
           onSearch={onPrice}
->>>>>>> 2ef57e622adabdd27ffd051db3ba22dd69f7b731
           style={{ width: "200px", marginTop: "20px", marginLeft: "20px" }}
           maxLength={4}
         />

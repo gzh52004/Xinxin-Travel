@@ -89,7 +89,7 @@ class App extends React.Component {
             ))}
           </Menu>
         </Sider>
-        <Layout className="site-layout" >
+        <Layout className="site-layout">
           <Header className="site-layout-background">
             <div className="btns">
               <Button type="link" onClick={this.goto.bind(this, "/reg")}>
@@ -105,6 +105,7 @@ class App extends React.Component {
             style={{
               margin: "24px 16px",
               padding: 24,
+              height: 1500,
             }}
           >
             <Layout.Content>
