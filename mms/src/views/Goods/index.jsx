@@ -12,7 +12,7 @@ import {
 import Title from "../../components/title/index";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
 
-// 新增用户
+// 新增商品
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
 
@@ -72,7 +72,8 @@ const Goods = function () {
     console.log("Received values of form: ", values);
     setVisible(false);
   };
-
+  const newday = datalist.newday;
+  console.log(newday, 777);
   React.useEffect(() => {
     request
       .get("/goods/zhoubian/list", {
@@ -116,7 +117,7 @@ const Goods = function () {
       {/* 按钮组 */}
       <div>
         <Search
-          placeholder="请输入姓名"
+          placeholder="请输入商品名称"
           allowClear
           enterButton
           size="large"
@@ -125,11 +126,11 @@ const Goods = function () {
           maxLength={4}
         />
         <Search
-          placeholder="请输入性别"
+          placeholder="请输入天数"
           allowClear
           enterButton
           size="large"
-          onSearch={onSearch}
+          onSearch={datalist.newday}
           style={{ width: "200px", marginTop: "20px", marginLeft: "20px" }}
           maxLength={4}
         />
@@ -147,7 +148,7 @@ const Goods = function () {
           }}
           icon={<PlusOutlined />}
         >
-          新增用户
+          新增商品
         </Button>
         <CollectionCreateForm
           visible={visible}
