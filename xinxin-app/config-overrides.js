@@ -7,6 +7,7 @@ const {
   disableEsLint,
   addWebpackAlias,
   addPostcssPlugins,
+  adjustStyleLoaders,
 } = require("customize-cra");
 
 module.exports = function override(config, env) {
@@ -23,12 +24,12 @@ module.exports = override(
 
   // 添加别名
   addWebpackAlias({
-    "@": path.join(__dirname, "./src/"),
+    "@": path.join(__dirname, "./src"),
   }),
   //
   fixBabelImports("import", {
     libraryName: "antd-mobile",
-    style: "css",
+    style: true,
   }),
 
   addPostcssPlugins([
@@ -38,5 +39,16 @@ module.exports = override(
       // propList: ['*', '!border*', '!font-size*', '!letter-spacing'],
       // propWhiteList: []
     }),
-  ])
+  ]),
+
+  adjustStyleLoaders((rule) => {
+    if (rule.test.toString().includes("scss")) {
+      rule.use.push({
+        loader: require.resolve("sass-resources-loader"),
+        options: {
+          resources: "./src/assets/scss/color/outcolor.scss", //这里是你自己放公共scss变量的路径
+        },
+      });
+    }
+  })
 );

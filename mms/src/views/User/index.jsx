@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Title from "../../components/title/index";
 import { Button, Modal, Form, Input, DatePicker, TreeSelect } from "antd";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
+import request from '../../utils/request'
 
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
@@ -71,10 +72,23 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 };
 const User = function () {
   const [visible, setVisible] = useState(false);
+  const [userlist, setuserlist] = useState(0);
   const onCreate = (values) => {
     console.log("Received values of form: ", values);
     setVisible(false);
   };
+  React.useEffect(() => {
+    request.get("/user/list", {
+      params: {
+        page: 1,
+        pagesize: 10,
+      },
+    })
+      .then(res => {
+        setuserlist(res.data.data)
+      })
+  }, []);
+  console.log(userlist,999)
   return (
     <div>
       <Title></Title>
