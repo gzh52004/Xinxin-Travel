@@ -105,7 +105,7 @@ class App extends React.Component {
             style={{
               margin: "24px 16px",
               padding: 24,
-              height: 1500,
+              height: 1000,
             }}
           >
             <Layout.Content>
@@ -121,7 +121,7 @@ class App extends React.Component {
                 <Route path="/login" component={Login} />
                 <Route path="/reg" component={Reg} />
                 <Route path="/notfound" render={() => <div>404</div>} />
-                <Redirect from="/" to="/user" exact />
+                <Redirect from="/" to="/reg" exact />
                 <Redirect to="/notfound" />
               </Switch>
             </Layout.Content>
