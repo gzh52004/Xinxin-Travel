@@ -105,7 +105,7 @@ class App extends React.Component {
             style={{
               margin: "24px 16px",
               padding: 24,
-              minheight: 100,
+              height: 1500,
             }}
           >
             <Layout.Content>

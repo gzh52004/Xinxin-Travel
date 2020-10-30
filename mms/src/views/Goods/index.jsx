@@ -1,12 +1,14 @@
-import requestlist from '../../utils/requestlist'
+import request from "../../utils/request";
 import React, { useState } from "react";
-import { Table, Button, Modal, Form, Input, DatePicker, TreeSelect } from "antd";
+import { Table, Button, Modal, Form, Input, DatePicker, Space } from "antd";
 import Title from "../../components/title/index";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
 
-const { Search } = Input;
-const onSearch = (value) => console.log(value);
 // 新增用户
+// const onSearch = (value) => {
+//   console.log(value,555);
+// }
+
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm();
   return (
@@ -55,88 +57,119 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
     </Modal>
   );
 };
+const Goods = function () {
+  const { Search } = Input;
+  const [ids,setids] = useState(0);
 
-
-
-class Goods extends React.Component {
-  state = {
-    // top: 'topCenter',
-    bottom: 'bottomCenter',
-    datalist: [],
-
+  const [bottom] = useState("bottomCenter");
+  const [datalist, setdatalist] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const onCreate = (values) => {
+    console.log("Received values of form: ", values);
+    setVisible(false);
   };
 
-  componentDidMount() {
-    requestlist.get("/goods/zhoubian/list", {
-      params: {
-        page: 1,
-        pagesize: 50,
-      },
-    })
-      .then(res => {
-        this.setState({
-          datalist: res.data.data
-        })
-        console.log(res.data.data, 888)
+  React.useEffect(() => {
+    request
+      .get("/goods/zhoubian/list", {
+        params: {
+          page: 1,
+          pagesize: 50,
+        },
       })
+      .then((res) => {
+        setdatalist(res.data.data);
+      });
+  }, []);
+
+  const onSearch = (value) => {
+    const dayscount = datalist.filter((num) => {
+      return num.newday === value;
+    });
+    setdatalist(dayscount);
+  };
+  const onPrice = (value) => {
+    console.log(datalist, 666);
+    const pricecount = datalist.filter((num) => {
+      if (num.price.length == value.length) {
+        return num.price < value;
+      }
+    })
+    console.log(pricecount, 777)
+    setdatalist(pricecount)
+
+  }
+  const ondel=(id) =>{
+    request.delete("goods/zhoubian/del", {
+      params: {
+        ids:id
+      }
+      })
+      .then((res) =>{
+      console.log(res.data)
+    })
+    console.log(id,456)
+
   }
 
-
-  render() {
-    const { datalist } = this.state;
-    console.log(datalist, 555)
-    const [visible, setVisible] = useState(false);
-    const onCreate = (values) => {
-      console.log("Received values of form: ", values);
-      setVisible(false);
-    };
-    const columns = [
-
-      {
-        title: '商品描述',
-        dataIndex: 'title',
-        render: text => <a>{text}</a>,
-      },
-      {
-        title: '价格',
-        dataIndex: 'price',
-      },
-      {
-        title: '优惠',
-        dataIndex: 'downprice',
-      },
-      {
-        title: '展示图',
-        dataIndex: 'url',
-        render: (text) => <img src={text} />
-      },
-      {
-        title: '天数',
-        dataIndex: 'newday',
-      },
-    ];
-
-
-    return (
+  const columns = [
+    {
+      title: "商品描述",
+      dataIndex: "title",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "价格",
+      dataIndex: "price",
+    },
+    {
+      title: "优惠",
+      dataIndex: "downprice",
+    },
+    {
+      title: "展示图",
+      dataIndex: "url",
+      render: (text) => <img src={text} />,
+    },
+    {
+      title: "天数",
+      dataIndex: "newday",
+    },
+    {
+      title: '删除',
+      dataIndex: "_id",
+      // key: 'action',
+      render: (text,recode) => (
+        <Space size="middle" onClick={() =>{
+          ondel(text)
+        }}>
+          <a>删除数据</a>
+        </Space>
+      ),
+    },
+  ];
+  return (
+    <div>
+      <Title></Title>
+      {/* 按钮组 */}
       <div>
-        <Title></Title>
         <Search
-          placeholder="请输入ID"
+          placeholder="请输入天数"
           allowClear
           enterButton
           size="large"
           onSearch={onSearch}
           style={{ width: "200px", marginTop: "20px" }}
-          maxLength={15}
+          maxLength={4}
         />
         <Search
-          placeholder="请输入商品名称"
+          placeholder="请输入最高价"
           allowClear
           enterButton
           size="large"
-          onSearch={onSearch}
+          onSearch={onPrice}
           style={{ width: "200px", marginTop: "20px", marginLeft: "20px" }}
-          maxLength={15}
+          maxLength={4}
         />
         <Button
           type="primary"
@@ -145,7 +178,7 @@ class Goods extends React.Component {
             setVisible(true);
           }}
           style={{
-            backgroundColor: "#3CB371",
+            backgroundColor: "#32CD32",
             marginLeft: "20px",
             marginTop: "20px",
             height: "40px",
@@ -153,7 +186,7 @@ class Goods extends React.Component {
           icon={<PlusOutlined />}
         >
           新增商品
-      </Button>
+        </Button>
         <CollectionCreateForm
           visible={visible}
           onCreate={onCreate}
@@ -163,7 +196,7 @@ class Goods extends React.Component {
         />
         <Button
           style={{
-            backgroundColor: "#FF6347",
+            backgroundColor: "#DAA520",
             marginLeft: "20px",
             marginTop: "20px",
             height: "40px",
@@ -173,16 +206,22 @@ class Goods extends React.Component {
           icon={<RedoOutlined />}
         >
           重置
-      </Button>
+        </Button>
+      </div>
+      <div>
         <Table
-          rowKey={datalist => datalist._id}
+          rowKey={(datalist) => datalist._id}
           columns={columns}
-          pagination={{ position: [this.state.bottom], defaultCurrent: 1, total: 50, pageSize: 5 }}
+          pagination={{
+            position: [bottom],
+            defaultCurrent: 1,
+            pageSize: 4,
+          }}
           dataSource={datalist}
         />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Goods;
