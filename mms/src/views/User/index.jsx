@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import Title from "../../components/title/index";
-import { Button, Modal, Form, Input, DatePicker, TreeSelect } from "antd";
+import {
+  Button,
+  Modal,
+  Form,
+  Input,
+  DatePicker,
+  TreeSelect,
+  Table,
+  Space,
+} from "antd";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
-import request from '../../utils/request'
+import request from "../../utils/request";
 
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
@@ -71,6 +80,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   );
 };
 const User = function () {
+  const [bottom] = useState("bottomCenter");
   const [visible, setVisible] = useState(false);
   const [userlist, setuserlist] = useState(0);
   const onCreate = (values) => {
@@ -78,17 +88,46 @@ const User = function () {
     setVisible(false);
   };
   React.useEffect(() => {
-    request.get("/user/list", {
-      params: {
-        page: 1,
-        pagesize: 10,
-      },
-    })
-      .then(res => {
-        setuserlist(res.data.data)
+    request
+      .get("/user/list", {
+        params: {
+          page: 1,
+          pagesize: 10,
+        },
       })
+      .then((res) => {
+        setuserlist(res.data.data);
+      });
   }, []);
-  console.log(userlist,999)
+  const onSearch = (value) => {
+    const dayscount = userlist.filter((num) => {
+      return num.username === value;
+    });
+    setuserlist(dayscount);
+  };
+  const ondel = () => {
+    console.log(564);
+  };
+  const columns = [
+    {
+      title: "用户名",
+      dataIndex: "username",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "密码",
+      dataIndex: "password",
+    },
+    {
+      title: "删除",
+      // key: 'action',
+      render: () => (
+        <Space size="middle" onClick={ondel}>
+          <a>删除数据</a>
+        </Space>
+      ),
+    },
+  ];
   return (
     <div>
       <Title></Title>
@@ -101,16 +140,7 @@ const User = function () {
           size="large"
           onSearch={onSearch}
           style={{ width: "200px", marginTop: "20px" }}
-          maxLength={4}
-        />
-        <Search
-          placeholder="请输入性别"
-          allowClear
-          enterButton
-          size="large"
-          onSearch={onSearch}
-          style={{ width: "200px", marginTop: "20px", marginLeft: "20px" }}
-          maxLength={4}
+          maxLength={15}
         />
         <Button
           type="primary"
@@ -148,6 +178,18 @@ const User = function () {
         >
           重置
         </Button>
+      </div>
+      <div>
+        <Table
+          rowKey={(userlist) => userlist._id}
+          columns={columns}
+          pagination={{
+            position: [bottom],
+            defaultCurrent: 1,
+            pageSize: 4,
+          }}
+          dataSource={userlist}
+        />
       </div>
     </div>
   );

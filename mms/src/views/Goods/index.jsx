@@ -1,22 +1,13 @@
 import request from "../../utils/request";
-import React, { useState, useEffect } from "react";
-import {
-  Table,
-  Button,
-  Modal,
-  Form,
-  Input,
-  DatePicker,
-  TreeSelect,
-  Space
-} from "antd";
+import React, { useState } from "react";
+import { Table, Button, Modal, Form, Input, DatePicker, Space } from "antd";
 import Title from "../../components/title/index";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
 
 // 新增用户
 // const onSearch = (value) => {
 //   console.log(value,555);
-// } 
+// }
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm();
@@ -70,15 +61,13 @@ const Goods = function () {
   const { Search } = Input;
   const [ids,setids] = useState(0);
 
-  const [bottom] = useState('bottomCenter');
+  const [bottom] = useState("bottomCenter");
   const [datalist, setdatalist] = useState(0);
   const [visible, setVisible] = useState(false);
   const onCreate = (values) => {
     console.log("Received values of form: ", values);
     setVisible(false);
   };
-
-
 
   React.useEffect(() => {
     request
@@ -90,23 +79,20 @@ const Goods = function () {
       })
       .then((res) => {
         setdatalist(res.data.data);
-
       });
   }, []);
 
   const onSearch = (value) => {
     const dayscount = datalist.filter((num) => {
-      return num.newday === value
-    })
-    setdatalist(dayscount)
-
-  }
+      return num.newday === value;
+    });
+    setdatalist(dayscount);
+  };
   const onPrice = (value) => {
-    console.log(datalist, 666)
+    console.log(datalist, 666);
     const pricecount = datalist.filter((num) => {
-
       if (num.price.length == value.length) {
-        return num.price < value
+        return num.price < value;
       }
     })
     console.log(pricecount, 777)
@@ -199,7 +185,7 @@ const Goods = function () {
           }}
           icon={<PlusOutlined />}
         >
-          新增信息
+          新增商品
         </Button>
         <CollectionCreateForm
           visible={visible}
