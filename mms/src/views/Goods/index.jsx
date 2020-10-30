@@ -8,13 +8,15 @@ import {
   Input,
   DatePicker,
   TreeSelect,
+  Space
 } from "antd";
 import Title from "../../components/title/index";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
 
 // 新增用户
-const { Search } = Input;
-const onSearch = (value) => console.log(value);
+// const onSearch = (value) => {
+//   console.log(value,555);
+// } 
 
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm();
@@ -65,13 +67,17 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
   );
 };
 const Goods = function () {
-  const bottom = useState("bottomCenter");
+  const { Search } = Input;
+
+  const [bottom] = useState('bottomCenter');
   const [datalist, setdatalist] = useState(0);
   const [visible, setVisible] = useState(false);
   const onCreate = (values) => {
     console.log("Received values of form: ", values);
     setVisible(false);
   };
+
+
 
   React.useEffect(() => {
     request
@@ -83,9 +89,33 @@ const Goods = function () {
       })
       .then((res) => {
         setdatalist(res.data.data);
-        console.log(res.data.data, 888);
+
       });
   }, []);
+
+  const onSearch = (value) => {
+    const dayscount = datalist.filter((num) => {
+      return num.newday === value
+    })
+    setdatalist(dayscount)
+
+  }
+  const onPrice = (value) => {
+    console.log(datalist, 666)
+    const pricecount = datalist.filter((num) => {
+
+      if (num.price.length == value.length) {
+        return num.price < value
+      }
+    })
+    console.log(pricecount, 777)
+    setdatalist(pricecount)
+
+  }
+  const ondel = () =>{
+    console.log(564)
+  }
+
   const columns = [
     {
       title: "商品描述",
@@ -109,6 +139,15 @@ const Goods = function () {
       title: "天数",
       dataIndex: "newday",
     },
+    {
+      title: '删除',
+      // key: 'action',
+      render: () => (
+        <Space size="middle" onClick={ondel}>
+          <a>删除数据</a>
+        </Space>
+      ),
+    },
   ];
   return (
     <div>
@@ -116,7 +155,7 @@ const Goods = function () {
       {/* 按钮组 */}
       <div>
         <Search
-          placeholder="请输入姓名"
+          placeholder="请输入天数"
           allowClear
           enterButton
           size="large"
@@ -125,11 +164,11 @@ const Goods = function () {
           maxLength={4}
         />
         <Search
-          placeholder="请输入性别"
+          placeholder="请输入最高价"
           allowClear
           enterButton
           size="large"
-          onSearch={onSearch}
+          onSearch={onPrice}
           style={{ width: "200px", marginTop: "20px", marginLeft: "20px" }}
           maxLength={4}
         />
@@ -177,8 +216,7 @@ const Goods = function () {
           pagination={{
             position: [bottom],
             defaultCurrent: 1,
-            total: 50,
-            pageSize: 5,
+            pageSize: 4,
           }}
           dataSource={datalist}
         />
