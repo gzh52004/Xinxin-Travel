@@ -1,13 +1,17 @@
-import requestlist from '../../utils/requestlist'
-import React, { useState } from "react";
+import request from '../../utils/request'
+import React, { useState, useEffect } from "react";
 import { Table, Button, Modal, Form, Input, DatePicker, TreeSelect } from "antd";
 import Title from "../../components/title/index";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
 
+
+
+// 新增用户
 const { Search } = Input;
 const onSearch = (value) => console.log(value);
-// 新增用户
+
 const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
+
   const [form] = Form.useForm();
   return (
     <Modal
@@ -55,88 +59,74 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
     </Modal>
   );
 };
-
-
-
-class Goods extends React.Component {
-  state = {
-    // top: 'topCenter',
-    bottom: 'bottomCenter',
-    datalist: [],
-
+const Goods = function () {
+  const bottom = useState('bottomCenter')
+  const [datalist, setdatalist] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const onCreate = (values) => {
+    console.log("Received values of form: ", values);
+    setVisible(false);
   };
 
-  componentDidMount() {
-    requestlist.get("/goods/zhoubian/list", {
+  React.useEffect(() => {
+    request.get("/goods/zhoubian/list", {
       params: {
         page: 1,
         pagesize: 50,
       },
     })
       .then(res => {
-        this.setState({
-          datalist: res.data.data
-        })
+        setdatalist(res.data.data)
         console.log(res.data.data, 888)
       })
-  }
+  }, []);
+  const columns = [
 
-
-  render() {
-    const { datalist } = this.state;
-    console.log(datalist, 555)
-    const [visible, setVisible] = useState(false);
-    const onCreate = (values) => {
-      console.log("Received values of form: ", values);
-      setVisible(false);
-    };
-    const columns = [
-
-      {
-        title: '商品描述',
-        dataIndex: 'title',
-        render: text => <a>{text}</a>,
-      },
-      {
-        title: '价格',
-        dataIndex: 'price',
-      },
-      {
-        title: '优惠',
-        dataIndex: 'downprice',
-      },
-      {
-        title: '展示图',
-        dataIndex: 'url',
-        render: (text) => <img src={text} />
-      },
-      {
-        title: '天数',
-        dataIndex: 'newday',
-      },
-    ];
-
-
-    return (
+    {
+      title: '商品描述',
+      dataIndex: 'title',
+      render: text => <a>{text}</a>,
+    },
+    {
+      title: '价格',
+      dataIndex: 'price',
+    },
+    {
+      title: '优惠',
+      dataIndex: 'downprice',
+    },
+    {
+      title: '展示图',
+      dataIndex: 'url',
+      render: (text) => <img src={text} />
+    },
+    {
+      title: '天数',
+      dataIndex: 'newday',
+    },
+  ];
+  return (
+    <div>
+      <Title></Title>
+      {/* 按钮组 */}
       <div>
-        <Title></Title>
         <Search
-          placeholder="请输入ID"
+          placeholder="请输入姓名"
           allowClear
           enterButton
           size="large"
           onSearch={onSearch}
           style={{ width: "200px", marginTop: "20px" }}
-          maxLength={15}
+          maxLength={4}
         />
         <Search
-          placeholder="请输入商品名称"
+          placeholder="请输入性别"
           allowClear
           enterButton
           size="large"
           onSearch={onSearch}
           style={{ width: "200px", marginTop: "20px", marginLeft: "20px" }}
-          maxLength={15}
+          maxLength={4}
         />
         <Button
           type="primary"
@@ -145,15 +135,15 @@ class Goods extends React.Component {
             setVisible(true);
           }}
           style={{
-            backgroundColor: "#3CB371",
+            backgroundColor: "#32CD32",
             marginLeft: "20px",
             marginTop: "20px",
             height: "40px",
           }}
           icon={<PlusOutlined />}
         >
-          新增商品
-      </Button>
+          新增用户
+        </Button>
         <CollectionCreateForm
           visible={visible}
           onCreate={onCreate}
@@ -163,7 +153,7 @@ class Goods extends React.Component {
         />
         <Button
           style={{
-            backgroundColor: "#FF6347",
+            backgroundColor: "#DAA520",
             marginLeft: "20px",
             marginTop: "20px",
             height: "40px",
@@ -173,16 +163,18 @@ class Goods extends React.Component {
           icon={<RedoOutlined />}
         >
           重置
-      </Button>
+        </Button>
+      </div>
+      <div>
         <Table
           rowKey={datalist => datalist._id}
           columns={columns}
-          pagination={{ position: [this.state.bottom], defaultCurrent: 1, total: 50, pageSize: 5 }}
+          pagination={{ position: [bottom], defaultCurrent: 1, total: 50, pageSize: 5 }}
           dataSource={datalist}
         />
       </div>
-    );
-  }
+    </div>
+  )
 }
 
 export default Goods;
