@@ -29,7 +29,9 @@ module.exports = override(
   //
   fixBabelImports("import", {
     libraryName: "antd-mobile",
-    style: true,
+    libraryName: "antd",
+    libraryDirectory: "es",
+    style: "css",
   }),
 
   addPostcssPlugins([

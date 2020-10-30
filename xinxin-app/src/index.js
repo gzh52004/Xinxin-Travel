@@ -5,6 +5,7 @@ import "./index.scss";
 import App from "./App.jsx";
 import reportWebVitals from "./reportWebVitals";
 import "antd-mobile/dist/antd-mobile.css";
+import "antd/dist/antd.css";
 
 import "./utils/rem";
 

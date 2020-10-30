@@ -14,6 +14,8 @@ import Home from "@/pages/Home";
 import Category from "@/pages/Category";
 import Help from "@/pages/Help";
 import Mine from "@/pages/Mine";
+import Reg from "@/pages/Reg";
+import Login from "@/pages/Login";
 
 @withRouter
 class TabBarFooter extends React.Component {
@@ -51,6 +53,10 @@ class TabBarFooter extends React.Component {
     selectedTab: this.props.location.pathname,
   };
 
+  componentWillReceiveProps(nextprops) {
+    console.log("路由改变了");
+  }
+
   render() {
     const { menu } = this.state;
     return (
@@ -59,7 +65,7 @@ class TabBarFooter extends React.Component {
           <TabBar
             tintColor="#00bf48"
             barTintColor="white"
-            noRenderContent="true"
+            noRenderContent={true}
           >
             {menu.map((item) => (
               <TabBar.Item
@@ -102,6 +108,8 @@ class TabBarFooter extends React.Component {
               />
             );
           })}
+          <Route path="/reg" component={Reg} />
+          <Route path="/login" component={Login} />
           <Route path="/notfound" render={() => <div>404 Not Found</div>} />
           <Redirect from="/" to="/home" exact />
           <Redirect to="/notfound" />
