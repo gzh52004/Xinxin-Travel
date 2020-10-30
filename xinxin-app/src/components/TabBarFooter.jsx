@@ -8,10 +8,12 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 
-import Home from "../pages/Home";
-import Category from "../pages/Category";
-import Help from "../pages/Help";
-import Mine from "../pages/Mine";
+import "@/assets/scss/TabBarFooter.scss";
+
+import Home from "@/pages/Home";
+import Category from "@/pages/Category";
+import Help from "@/pages/Help";
+import Mine from "@/pages/Mine";
 
 @withRouter
 class TabBarFooter extends React.Component {
@@ -54,7 +56,11 @@ class TabBarFooter extends React.Component {
     return (
       <div>
         <div className="TabBar">
-          <TabBar tintColor="#33A3F4" barTintColor="white">
+          <TabBar
+            tintColor="#00bf48"
+            barTintColor="white"
+            noRenderContent="true"
+          >
             {menu.map((item) => (
               <TabBar.Item
                 title={item.text}
@@ -85,6 +91,7 @@ class TabBarFooter extends React.Component {
             ))}
           </TabBar>
         </div>
+
         <Switch>
           {menu.map((item) => {
             return (

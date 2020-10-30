@@ -2,3 +2,78 @@
   position: fixed;
   top: 0;
 }
+
+.kandian {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  .my-carousel {
+    width: 100%;
+    .v-item {
+      height: 25px;
+      line-height: 25px;
+      padding-left: 10px;
+    }
+  }
+}
+
+.activity {
+  padding: 6px 4px;
+  border-top: 14px solid #ddd;
+  border-bottom: 14px solid #ddd;
+  border-image: url(../../assets/img/border_half.png) 2 stretch;
+  background-color: #fff;
+}
+
+.travel {
+  height: 100%;
+  .tuwen {
+    display: flex;
+    color: #333;
+    padding: 8px;
+    justify-content: space-evenly;
+    border-image: url(../../assets/img/border_half.png) 2 stretch;
+    .pic {
+      .sub {
+        text-align: center;
+        width: 48.5px;
+        height: 17px;
+        position: absolute;
+        top: 10;
+        left: 10;
+        padding: 0 4px 0 3px;
+        line-height: 17px;
+        font-size: 2px;
+        color: #fff;
+        border-radius: 2px;
+        background-image: -webkit-gradient(
+          linear,
+          right top,
+          left top,
+          from(#00bf48),
+          to(#32ea77)
+        ) !important;
+        background-image: linear-gradient(to left, #00bf48, #32ea77) !important;
+      }
+      img {
+        width: 120px;
+        height: 80px;
+        border-radius: 6px;
+      }
+    }
+    .text {
+      height: 80px;
+      margin-left: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .title {
+      }
+      .money {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

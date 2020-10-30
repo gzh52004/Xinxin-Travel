@@ -1,14 +1,26 @@
 import React from "react";
-import { SearchBar } from "antd-mobile";
 
+import TopSearch from "@/components/TopSearch";
+import HomeCarousel from "./HomeCarousel.jsx";
+import HomeNav from "./HomeNav.jsx";
+import HomeLook from "./HomeLook.jsx";
+import HomeActivity from "./HomeActivity";
+import HomeTravel from "./HomeTravel";
 import "./style.scss";
 
-const Home = () => {
-  return (
-    <div>
-      <SearchBar className="search" placeholder="Search" maxLength={8} />
-    </div>
-  );
-};
+class Home extends React.Component {
+  render() {
+    return (
+      <div style={{ overflowY: "auto" }}>
+        <TopSearch />
+        <HomeCarousel />
+        <HomeNav />
+        <HomeLook />
+        <HomeActivity />
+        <HomeTravel />
+      </div>
+    );
+  }
+}
 
 export default Home;
