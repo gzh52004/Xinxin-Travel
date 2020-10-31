@@ -1,6 +1,7 @@
 import React from "react";
 import { SearchBar, Icon } from "antd-mobile";
 import { UserOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 import "@/assets/scss/TopSearch.scss";
 
@@ -32,8 +33,9 @@ const TopSearch = () => {
         placeholder="线路/景点/门票/旅行社"
         maxLength={8}
       />
-
-      <UserOutlined className="userIcon" />
+      <Link to="/mine">
+        <UserOutlined className="userIcon" />
+      </Link>
     </div>
   );
 };
