@@ -1,6 +1,5 @@
 import React from "react";
-import { NavBar, Icon, List, InputItem, Button } from "antd-mobile";
-
+import { NavBar, Icon, List, InputItem, Button, WhiteSpace } from "antd-mobile";
 import SHA256 from "crypto-js/sha256";
 
 import "./style.scss";
@@ -41,6 +40,7 @@ class Reg extends React.Component {
           <InputItem onChange={(value) => this.handleChange("pwd", value)}>
             密码：
           </InputItem>
+          <WhiteSpace />
           <ListItem>
             <Button style={{ backgroundColor: "#f91", color: "#fff" }}>
               注册

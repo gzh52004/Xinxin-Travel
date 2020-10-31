@@ -45,6 +45,10 @@ class HomeTravel extends React.Component {
     });
   }
 
+  goto = (id) => {
+    console.log(id);
+  };
+
   render() {
     const { aroundList, homelandList, abroadList } = this.state;
     return (
@@ -66,13 +70,18 @@ class HomeTravel extends React.Component {
           >
             {aroundList.map((item) => {
               return (
-                <a href="" className="tuwen" key={item._id}>
+                <div className="tuwen" key={item._id}>
                   <div className="pic">
                     <span className="sub">跟团游</span>
                     <img src={item.url} alt="" />
                   </div>
                   <div className="text">
-                    <div className="title">{item.title}</div>
+                    <div
+                      className="title"
+                      onClick={this.goto.bind(this, item._id)}
+                    >
+                      {item.title}
+                    </div>
                     <div className="money">
                       <span style={{ color: "#999" }}>{item.newday}</span>
                       <span style={{ color: "#f60" }}>
@@ -80,7 +89,7 @@ class HomeTravel extends React.Component {
                       </span>
                     </div>
                   </div>
-                </a>
+                </div>
               );
             })}
             <div className="moreTravel">
@@ -100,13 +109,18 @@ class HomeTravel extends React.Component {
           >
             {homelandList.map((item) => {
               return (
-                <a href="" className="tuwen" key={item._id}>
+                <div className="tuwen" key={item._id}>
                   <div className="pic">
                     <span className="sub">跟团游</span>
                     <img src={item.url} alt="" />
                   </div>
                   <div className="text">
-                    <div className="title">{item.title}</div>
+                    <div
+                      className="title"
+                      onClick={this.goto.bind(this, item._id)}
+                    >
+                      {item.title}
+                    </div>
                     <div className="money">
                       <span style={{ color: "#999" }}>{item.newday}</span>
                       <span style={{ color: "#f60" }}>
@@ -114,7 +128,7 @@ class HomeTravel extends React.Component {
                       </span>
                     </div>
                   </div>
-                </a>
+                </div>
               );
             })}
             <div className="moreTravel">
@@ -134,13 +148,18 @@ class HomeTravel extends React.Component {
           >
             {abroadList.map((item) => {
               return (
-                <a href="" className="tuwen" key={item._id}>
+                <div className="tuwen" key={item._id}>
                   <div className="pic">
                     <span className="sub">跟团游</span>
                     <img src={item.url} alt="" />
                   </div>
                   <div className="text">
-                    <div className="title">{item.title}</div>
+                    <div
+                      className="title"
+                      onClick={this.goto.bind(this, item._id)}
+                    >
+                      {item.title}
+                    </div>
                     <div className="money">
                       <span style={{ color: "#999" }}>{item.newday}</span>
                       <span style={{ color: "#f60" }}>
@@ -148,7 +167,7 @@ class HomeTravel extends React.Component {
                       </span>
                     </div>
                   </div>
-                </a>
+                </div>
               );
             })}
             <div className="moreTravel">
