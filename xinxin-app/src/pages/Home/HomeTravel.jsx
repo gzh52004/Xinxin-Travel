@@ -48,7 +48,9 @@ class HomeTravel extends React.Component {
   goto = (id) => {
     console.log(id);
   };
-
+  gotop = (path) => {
+    this.props.history.push(path);
+  };
   render() {
     const { aroundList, homelandList, abroadList } = this.state;
     return (
@@ -92,7 +94,10 @@ class HomeTravel extends React.Component {
                 </div>
               );
             })}
-            <div className="moreTravel">
+            <div
+              className="moreTravel"
+              onClick={this.gotop.bind(this, "/list")}
+            >
               <a href="" style={{ color: "#00bf48" }}>
                 查看更多
               </a>
