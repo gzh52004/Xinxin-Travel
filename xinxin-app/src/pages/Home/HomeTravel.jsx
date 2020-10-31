@@ -98,7 +98,7 @@ class HomeTravel extends React.Component {
               className="moreTravel"
               onClick={this.gotop.bind(this, "/list")}
             >
-              <a href="" style={{ color: "#00bf48" }}>
+              <a style={{ color: "#00bf48" }}>
                 查看更多
               </a>
               <Icon type="right" size="md" color="#00bf48" />
