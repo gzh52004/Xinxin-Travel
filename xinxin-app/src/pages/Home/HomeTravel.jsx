@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Tabs, Badge } from "antd-mobile";
+import { Tabs, Badge, Icon } from "antd-mobile";
 import request from "@/utils/request";
 
 const tabs = [
@@ -24,14 +24,29 @@ class HomeTravel extends React.Component {
         pagesize: 5,
       },
     });
+    // 国内游
+    const { data: homelandList } = await request.get("/goods/guonei/list", {
+      params: {
+        page: 1,
+        pagesize: 5,
+      },
+    });
+    // 出境游
+    const { data: abroadList } = await request.get("/goods/chujing/list", {
+      params: {
+        page: 1,
+        pagesize: 5,
+      },
+    });
     this.setState({
       aroundList: aroundList.data,
+      homelandList: homelandList.data,
+      abroadList: abroadList.data,
     });
   }
 
   render() {
-    const { aroundList } = this.state;
-    console.log(aroundList);
+    const { aroundList, homelandList, abroadList } = this.state;
     return (
       <div className="travel">
         <Tabs
@@ -40,59 +55,113 @@ class HomeTravel extends React.Component {
           tabBarUnderlineStyle={{ border: "1px solid #00bf48" }}
           renderTab={(tab) => <Badge>{tab.title}</Badge>}
           initialPage={0}
-          onChange={(tab, index) => {
-            console.log("onChange", index, tab);
-          }}
-          onTabClick={(tab, index) => {
-            console.log("onTabClick", index, tab);
-          }}
         >
           <div
             style={{
-              display: "flex",
-              height: "500px",
+              display: "block",
+              height: "100%",
               backgroundColor: "#fff",
+              paddingBottom: "50px",
             }}
           >
-            <a href="" className="tuwen">
-              <div className="pic">
-                <span className="sub">跟团游</span>
-                <img src="https://c.cncnimg.cn/041/042/6c36_m.jpg" alt="" />
-              </div>
-              <div className="text">
-                <div className="title">
-                  广州去惠州巽寮湾二天游价格、广州到惠东巽寮湾两日自由行
-                </div>
-                <div className="money">
-                  <span style={{ color: "#999" }}>2日游</span>
-                  <span style={{ color: "#f60" }}>
-                    ￥<b style={{ fontSize: "18px" }}>88</b>起
-                  </span>
-                </div>
-              </div>
-            </a>
+            {aroundList.map((item) => {
+              return (
+                <a href="" className="tuwen" key={item._id}>
+                  <div className="pic">
+                    <span className="sub">跟团游</span>
+                    <img src={item.url} alt="" />
+                  </div>
+                  <div className="text">
+                    <div className="title">{item.title}</div>
+                    <div className="money">
+                      <span style={{ color: "#999" }}>{item.newday}</span>
+                      <span style={{ color: "#f60" }}>
+                        ￥<b style={{ fontSize: "18px" }}>{item.price}</b>起
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+            <div className="moreTravel">
+              <a href="" style={{ color: "#00bf48" }}>
+                查看更多
+              </a>
+              <Icon type="right" size="md" color="#00bf48" />
+            </div>
           </div>
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "150px",
+              display: "block",
+              height: "100%",
               backgroundColor: "#fff",
+              paddingBottom: "50px",
             }}
           >
-            Content of third tab
+            {homelandList.map((item) => {
+              return (
+                <a href="" className="tuwen" key={item._id}>
+                  <div className="pic">
+                    <span className="sub">跟团游</span>
+                    <img src={item.url} alt="" />
+                  </div>
+                  <div className="text">
+                    <div className="title">{item.title}</div>
+                    <div className="money">
+                      <span style={{ color: "#999" }}>{item.newday}</span>
+                      <span style={{ color: "#f60" }}>
+                        ￥<b style={{ fontSize: "18px" }}>{item.price}</b>起
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+            <div className="moreTravel">
+              <a href="" style={{ color: "#00bf48" }}>
+                查看更多
+              </a>
+              <Icon type="right" size="md" color="#00bf48" />
+            </div>
           </div>
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "150px",
+              display: "block",
+              height: "100%",
               backgroundColor: "#fff",
+              paddingBottom: "50px",
             }}
           >
-            Content of third tab
+            {abroadList.map((item) => {
+              return (
+                <a href="" className="tuwen" key={item._id}>
+                  <div className="pic">
+                    <span className="sub">跟团游</span>
+                    <img src={item.url} alt="" />
+                  </div>
+                  <div className="text">
+                    <div className="title">{item.title}</div>
+                    <div className="money">
+                      <span style={{ color: "#999" }}>{item.newday}</span>
+                      <span style={{ color: "#f60" }}>
+                        ￥<b style={{ fontSize: "18px" }}>{item.price}</b>起
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+            <div className="moreTravel">
+              <a
+                href=""
+                style={{
+                  color: "#00bf48",
+                }}
+              >
+                查看更多
+              </a>
+              <Icon type="right" size="md" color="#00bf48" />
+            </div>
           </div>
         </Tabs>
       </div>

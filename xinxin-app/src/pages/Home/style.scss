@@ -33,7 +33,7 @@
     color: #333;
     padding: 8px;
     justify-content: space-evenly;
-    border-image: url(../../assets/img/border_half.png) 2 stretch;
+    border-bottom: 1px solid #ddd;
     .pic {
       .sub {
         text-align: center;
@@ -68,12 +68,18 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      .title {
-      }
       .money {
         display: flex;
         justify-content: space-between;
       }
     }
+  }
+  .moreTravel {
+    text-align: center;
+    font-size: 15px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

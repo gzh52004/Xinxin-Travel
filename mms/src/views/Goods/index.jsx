@@ -59,6 +59,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
 };
 const Goods = function () {
   const { Search } = Input;
+  const [ids,setids] = useState(0);
 
   const [bottom] = useState("bottomCenter");
   const [datalist, setdatalist] = useState(0);
@@ -93,13 +94,23 @@ const Goods = function () {
       if (num.price.length == value.length) {
         return num.price < value;
       }
-    });
-    console.log(pricecount, 777);
-    setdatalist(pricecount);
-  };
-  const ondel = () => {
-    console.log(564);
-  };
+    })
+    console.log(pricecount, 777)
+    setdatalist(pricecount)
+
+  }
+  const ondel=(id) =>{
+    request.delete("goods/zhoubian/del", {
+      params: {
+        ids:id
+      }
+      })
+      .then((res) =>{
+      console.log(res.data)
+    })
+    console.log(id,456)
+
+  }
 
   const columns = [
     {
@@ -125,10 +136,13 @@ const Goods = function () {
       dataIndex: "newday",
     },
     {
-      title: "删除",
+      title: '删除',
+      dataIndex: "_id",
       // key: 'action',
-      render: () => (
-        <Space size="middle" onClick={ondel}>
+      render: (text,recode) => (
+        <Space size="middle" onClick={() =>{
+          ondel(text)
+        }}>
           <a>删除数据</a>
         </Space>
       ),
