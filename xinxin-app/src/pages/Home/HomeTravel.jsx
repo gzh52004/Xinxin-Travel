@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Tabs, Badge, Icon } from "antd-mobile";
+import { Link } from "react-router-dom";
 import request from "@/utils/request";
 
 const tabs = [
@@ -48,9 +49,7 @@ class HomeTravel extends React.Component {
   goto = (id) => {
     console.log(id);
   };
-  gotop = (path) => {
-    this.props.history.push(path);
-  };
+
   render() {
     const { aroundList, homelandList, abroadList } = this.state;
     return (
@@ -94,13 +93,10 @@ class HomeTravel extends React.Component {
                 </div>
               );
             })}
-            <div
-              className="moreTravel"
-              onClick={this.gotop.bind(this, "/list")}
-            >
-              <a href="" style={{ color: "#00bf48" }}>
+            <div className="moreTravel">
+              <Link to="/list" style={{ color: "#00bf48" }}>
                 查看更多
-              </a>
+              </Link>
               <Icon type="right" size="md" color="#00bf48" />
             </div>
           </div>
@@ -137,9 +133,9 @@ class HomeTravel extends React.Component {
               );
             })}
             <div className="moreTravel">
-              <a href="" style={{ color: "#00bf48" }}>
+              <Link to="/list" style={{ color: "#00bf48" }}>
                 查看更多
-              </a>
+              </Link>
               <Icon type="right" size="md" color="#00bf48" />
             </div>
           </div>
@@ -176,14 +172,9 @@ class HomeTravel extends React.Component {
               );
             })}
             <div className="moreTravel">
-              <a
-                href=""
-                style={{
-                  color: "#00bf48",
-                }}
-              >
+              <Link to="/list" style={{ color: "#00bf48" }}>
                 查看更多
-              </a>
+              </Link>
               <Icon type="right" size="md" color="#00bf48" />
             </div>
           </div>

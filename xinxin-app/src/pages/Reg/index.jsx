@@ -36,7 +36,7 @@ class Reg extends React.Component {
   };
 
   // 用户名验证
-  handleUser = (key, val) => {
+  handleUser = async (key, val) => {
     if (val.replace(/\s/g, "").length < 6) {
       this.setState({
         userError: true,
@@ -46,29 +46,25 @@ class Reg extends React.Component {
       if (!val && val.length < 6) {
         return;
       }
-      request
-        .get("/user/checkname", {
-          params: {
-            username: val,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.flag == false) {
-            Toast.fail("用户名已存在", 2);
-            this.setState({
-              userError: true,
-              buttonStatus: true,
-            });
-            return;
-          } else {
-            Toast.success("用户名可以使用", 2);
-            this.setState({
-              userError: false,
-              buttonStatus: false,
-            });
-          }
+      const { data } = await request.get("/user/checkname", {
+        params: {
+          username: val,
+        },
+      });
+      if (data.flag == false) {
+        Toast.fail("用户名已存在", 2);
+        this.setState({
+          userError: true,
+          buttonStatus: true,
         });
+        return;
+      } else {
+        Toast.success("用户名可以使用", 2);
+        this.setState({
+          userError: false,
+          buttonStatus: false,
+        });
+      }
     }
     this.setState({
       [key]: val,
