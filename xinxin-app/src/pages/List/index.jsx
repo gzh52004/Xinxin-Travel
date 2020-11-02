@@ -1,5 +1,6 @@
 import React from "react";
 import { NavBar, Icon, Menu, ActivityIndicator } from "antd-mobile";
+import { withRouter } from "react-router-dom";
 import request from "@/utils/request";
 
 // const data = [
@@ -30,7 +31,7 @@ import request from "@/utils/request";
 //     ],
 //   },
 // ];
-
+@withRouter
 class List extends React.Component {
   // 返回事件
   goback = () => {
@@ -94,7 +95,7 @@ class List extends React.Component {
     });
   }
   goto = (id) => {
-    console.log(id);
+    this.props.history.push("/listdetail/" + id);
   };
   render() {
     const { aroundList } = this.state;
