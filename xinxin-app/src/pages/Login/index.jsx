@@ -77,7 +77,7 @@ class Login extends React.Component {
       Toast.success("登录成功！", 2);
       // 跳转至首页
       this.props.history.push({
-        pathname: "/home",
+        pathname: "/mine",
       });
     } else {
       Toast.fail("用户名或密码错误", 2);
@@ -128,17 +128,24 @@ class Login extends React.Component {
                 忘记密码
               </Link>
             </p>
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "12px",
+                height: "12px",
+                lineHeight: "12px",
+              }}
+            >
+              登录即代表您同意我们的&nbsp;
+              <a href="" style={{ color: "#2186DB" }}>
+                服务协议
+              </a>
+              &nbsp;和&nbsp;
+              <a href="" style={{ color: "#2186DB" }}>
+                隐私政策
+              </a>
+            </p>
           </ListItem>
-          <p style={{ textAlign: "center", fontSize: "12px" }}>
-            登录即代表您同意我们的&nbsp;
-            <a href="" style={{ color: "#2186DB" }}>
-              服务协议
-            </a>
-            &nbsp;和&nbsp;
-            <a href="" style={{ color: "#2186DB" }}>
-              隐私政策
-            </a>
-          </p>
         </List>
       </div>
     );

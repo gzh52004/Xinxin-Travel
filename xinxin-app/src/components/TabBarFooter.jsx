@@ -114,7 +114,7 @@ class TabBarFooter extends React.Component {
           <Route path="/reg" component={Reg} />
           <Route path="/login" component={Login} />
           <Route path="/list" component={List} />
-          <Route path="/listdetail" component={ListDetail} />
+          <Route path="/listdetail/:id" component={ListDetail} />
           <Route path="/profile" component={Profile} />
           <Route path="/notfound" render={() => <div>404 Not Found</div>} />
           <Redirect from="/" to="/home" exact />

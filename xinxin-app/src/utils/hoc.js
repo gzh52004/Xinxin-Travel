@@ -27,7 +27,6 @@ export function withAuth(InnerComponent) {
   @withUser
   class OuterComponent extends InnerComponent {
     render() {
-      console.log(this.props);
       const {
         currentUser,
         Authorization,

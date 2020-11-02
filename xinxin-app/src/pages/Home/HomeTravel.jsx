@@ -2,6 +2,7 @@ import React from "react";
 
 import { Tabs, Badge, Icon } from "antd-mobile";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import request from "@/utils/request";
 
 const tabs = [
@@ -9,7 +10,7 @@ const tabs = [
   { title: "国内游", sub: "2" },
   { title: "境外游", sub: "3" },
 ];
-
+@withRouter
 class HomeTravel extends React.Component {
   state = {
     aroundList: [],
@@ -47,7 +48,7 @@ class HomeTravel extends React.Component {
   }
 
   goto = (id) => {
-    console.log(id);
+    this.props.history.push("/listdetail/" + id);
   };
 
   render() {
