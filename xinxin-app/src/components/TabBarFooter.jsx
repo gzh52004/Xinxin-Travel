@@ -18,7 +18,7 @@ import Reg from "@/pages/Reg";
 import Login from "@/pages/Login";
 import List from "@/pages/List";
 import ListDetail from "@/pages/ListDetail";
-
+import Profile from "@/pages/Mine/Profile";
 
 @withRouter
 class TabBarFooter extends React.Component {
@@ -115,6 +115,7 @@ class TabBarFooter extends React.Component {
           <Route path="/login" component={Login} />
           <Route path="/list" component={List} />
           <Route path="/listdetail" component={ListDetail} />
+          <Route path="/profile" component={Profile} />
           <Route path="/notfound" render={() => <div>404 Not Found</div>} />
           <Redirect from="/" to="/home" exact />
           <Redirect to="/notfound" />

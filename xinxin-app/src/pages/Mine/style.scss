@@ -1,0 +1,95 @@
+.myAboutTop {
+  height: 134.39px;
+  background-size: 100% auto;
+  position: relative;
+  background-color: #666;
+  .avatar {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    color: #fff;
+    .img {
+      border: #fff solid 1px;
+      padding: 0.1rem;
+      display: inline-block;
+      border-radius: 50%;
+      margin-top: 20px;
+      img {
+        background: #fff;
+        padding: 3px;
+        width: 63.59px;
+        height: 63.59px;
+        border-radius: 50%;
+        display: block;
+      }
+    }
+  }
+}
+.myOrder {
+  border: #d8d8d8 solid 1px;
+  border-width: 1px 0 1px 0;
+  background: #fff;
+  margin-top: 10px;
+  .tit {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: #d8d8d8 solid 1px;
+    padding: 13.44px 14.4px 9.6px;
+    span {
+      border-left: #00bf49 solid 3px;
+      height: 16px;
+      line-height: 16px;
+      display: inline-block;
+      font-size: 16px;
+      padding-left: 4px;
+    }
+  }
+  .list {
+    text-align: center;
+    display: -webkit-box;
+  }
+}
+
+.myWallet {
+  border: #d8d8d8 solid 1px;
+  border-width: 1px 0 1px 0;
+  background: #fff;
+  margin-top: 10px;
+  .tit {
+    border-bottom: #d8d8d8 solid 1px;
+    padding: 13.44px 14.4px 9.6px;
+    span {
+      border-left: #00bf49 solid 3px;
+      height: 16px;
+      line-height: 16px;
+      display: inline-block;
+      font-size: 16px;
+      padding-left: 4px;
+    }
+  }
+  .list {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+.IconList {
+  border: #d8d8d8 solid 1px;
+  border-width: 1px 0 1px 0;
+  background: #fff;
+  margin-top: 10px;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.mySet {
+  border: #d8d8d8 solid 1px;
+  border-width: 1px 0 1px 0;
+  background: #fff;
+  margin-top: 10px;
+  padding-left: 14px;
+}

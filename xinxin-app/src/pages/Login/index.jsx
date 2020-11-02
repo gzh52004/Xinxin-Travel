@@ -11,10 +11,12 @@ import {
 import ListItem from "antd-mobile/lib/list/ListItem";
 import { Link } from "react-router-dom";
 import SHA256 from "crypto-js/sha256";
+import { connect } from "react-redux";
 
 import "./style.scss";
 import request from "@/utils/request";
 
+@connect()
 class Login extends React.Component {
   state = {
     username: "", //账号
@@ -62,8 +64,16 @@ class Login extends React.Component {
         pwd,
       },
     });
+    console.log(data);
 
     if (data.flag == true && data.code === 1) {
+      // 把数据存入redux中
+      this.props.dispatch({
+        type: "login",
+        user: data.data,
+        token: data.token,
+      });
+
       Toast.success("登录成功！", 2);
       // 跳转至首页
       this.props.history.push({
