@@ -12,7 +12,7 @@ import SHA256 from "crypto-js/sha256";
 
 import "./style.scss";
 import ListItem from "antd-mobile/lib/list/ListItem";
-import request from "../../utils/request";
+import request from "@/utils/request";
 
 class Reg extends React.Component {
   state = {

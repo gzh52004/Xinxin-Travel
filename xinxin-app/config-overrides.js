@@ -12,6 +12,7 @@ const {
 
 module.exports = function override(config, env) {
   // do stuff with the webpack config...
+  config = injectBabelPlugin(["syntax-dynamic-import"], config);
   return config;
 };
 

@@ -7,18 +7,19 @@ import {
   QuestionCircleFilled,
   UserOutlined,
 } from "@ant-design/icons";
+import Loadable from "@/utils/Loading";
 
 import "@/assets/scss/TabBarFooter.scss";
 
-import Home from "@/pages/Home";
-import Category from "@/pages/Category";
-import Help from "@/pages/Help";
-import Mine from "@/pages/Mine";
-import Reg from "@/pages/Reg";
-import Login from "@/pages/Login";
-import List from "@/pages/List";
-import ListDetail from "@/pages/ListDetail";
-import Profile from "@/pages/Mine/Profile";
+const Home = Loadable(() => import("@/pages/Home"));
+const Category = Loadable(() => import("@/pages/Category"));
+const Help = Loadable(() => import("@/pages/Help"));
+const Mine = Loadable(() => import("@/pages/Mine"));
+const Reg = Loadable(() => import("@/pages/Reg"));
+const Login = Loadable(() => import("@/pages/Login"));
+const List = Loadable(() => import("@/pages/List"));
+const ListDetail = Loadable(() => import("@/pages/ListDetail"));
+const Profile = Loadable(() => import("@/pages/Mine/Profile"));
 
 @withRouter
 class TabBarFooter extends React.Component {
