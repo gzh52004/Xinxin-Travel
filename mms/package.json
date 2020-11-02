@@ -27,9 +27,11 @@
     "@babel/plugin-proposal-decorators": "^7.10.5",
     "crypto-js": "^4.0.0",
     "css-loader": "^5.0.0",
+    "file-loader": "^6.2.0",
     "react-router-dom": "^5.2.0",
     "sass-loader": "^10.0.3",
-    "style-loader": "^2.0.0"
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

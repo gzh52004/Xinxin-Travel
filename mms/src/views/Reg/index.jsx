@@ -1,45 +1,54 @@
 import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import CryptoJS from "crypto-js";
+import { Form, Input, Button, Checkbox, message } from "antd";
 
 import request from "@/utils/request";
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 8 },
 };
 
 const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
+  wrapperCol: { offset: 11, span: 11 },
 };
-
-const Reg = function () {
-  const rules = {
-    username: [
-      { required: true, message: "请输入您的用户名" },
-      {
-        async validator(rule, username) {
-          if (!username) {
-            return;
-          }
-          const { data } = await request.get("user/checkname", {
-            params: {
-              username: username,
-            },
-          });
-          if (data.flag === true) {
-            return Promise.resolve();
-          }
-          return Promise.reject("用户名已存在");
-        },
+const rules = {
+  username: [
+    { required: true, message: "请输入您的用户名" },
+    {
+      async validator(rule, username) {
+        if (!username) {
+          return;
+        }
+        const { data } = await request.get("user/checkname", {
+          params: {
+            username: username,
+          },
+        });
+        if (data.flag === true) {
+          return Promise.resolve();
+        }
+        return Promise.reject("用户名已存在");
       },
-    ],
-    password: [
-      { required: true, message: "请输入您的密码" },
-      { min: 6, max: 12, message: "密码格式不正确，必须为6-12位" },
-    ],
-  };
-  const onFinish = (values) => {
-    request.post(user)
+    },
+  ],
+  password: [
+    { required: true, message: "请输入您的密码" },
+    { min: 6, max: 12, message: "密码格式不正确，必须为6-12位" },
+  ],
+};
+const Reg = function (props) {
+  const onFinish = async (values) => {
+    values.password = CryptoJS.SHA256(values.password).toString();
+    console.log("打印加密", values);
+    const { data } = await request.post("user/register", values);
+    if (data.flag === true) {
+      message.success("注册成功");
+    }
+    props.history.push({
+      pathname: "/login",
+      state: { username: values.username },
+    });
   };
   return (
     <div>
@@ -62,10 +71,6 @@ const Reg = function () {
 
         <Form.Item label="密码" name="password" rules={rules.password}>
           <Input.Password />
-        </Form.Item>
-
-        <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-          <Checkbox>7天免登录</Checkbox>
         </Form.Item>
 
         <Form.Item {...tailLayout}>
